@@ -1,6 +1,8 @@
 'use strict';
 import * as path from 'path';
 import webpack from 'webpack';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import ManifestPlugin from 'webpack-manifest-plugin';
 
 /* tslint:disable */
 const autoprefixer = require('autoprefixer');
@@ -29,6 +31,12 @@ module.exports = (app, defaultConfig, dev) => {
                 __DAILY__: true,
             })
         );
+      defaultConfig.output = {
+        path: path.join(__dirname, '../app/public'),
+        filename: '[name].js',
+        publicPath: '/public/',
+        chunkFilename: '[name].[chunkhash:8].chunk.js'
+      };
     } else {
         defaultConfig.plugins.push(
             new webpack.DefinePlugin({
@@ -43,6 +51,22 @@ module.exports = (app, defaultConfig, dev) => {
                 },
             })
         );
+      defaultConfig.plugins.push(
+        new ExtractTextPlugin('[name].[contenthash].css')
+      );
+      defaultConfig.plugins.push(
+        new ManifestPlugin({
+          fileName: 'manifest.json',
+          manifestVariable: "webpackManifest",
+          writeToFileEmit: true,
+        }),
+      );
+      defaultConfig.output = {
+        path: path.join(__dirname, '../app/public'),
+        filename: '[name].[chunkhash:8].js',
+        publicPath: '/public/',
+        chunkFilename: '[name].[chunkhash:8].chunk.js'
+      };
     }
 
     const tsLoader = {

@@ -61,6 +61,8 @@ export default class RouteView extends React.Component<InterfaceIC> {
 
   public render() {
     const { title, html, state, helper } = this.props;
+    const indexJs = __DEV__ ? helper.asset('index.js') : helper.assetWithHash('index.js');
+    const indexCss = __DEV__ ? helper.asset('index.css') : helper.assetWithHash('index.css');
     return (
       <html>
       <head>
@@ -73,7 +75,7 @@ export default class RouteView extends React.Component<InterfaceIC> {
         />
         <title>{title}</title>
         <script src="https://m.xyz.cn/xyz/dist/js/base/flexible.js" />
-        <link rel="stylesheet" href={helper.asset('index.css')} />
+        <link rel="stylesheet" href={indexCss} />
       </head>
       <body>
       <div id="container" dangerouslySetInnerHTML={{ __html: html }} />
@@ -83,7 +85,7 @@ export default class RouteView extends React.Component<InterfaceIC> {
         }}
       />
       <script src={helper.asset('manifest.js')} />
-      <script src={helper.asset('index.js')} />
+      <script src={indexJs} />
       </body>
       </html>
     );
