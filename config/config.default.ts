@@ -31,5 +31,12 @@ module.exports =  () => {
                 },
             },
         },
+        alinode: {
+          server: 'wss://agentserver.node.aliyun.com:8080',
+          appid: 75805,
+          secret: '21124cbced516e4cb2c9c7893c53133377401ee2',
+          logdir: '/logs/',
+          error_log: [ '/root/.logs/error.#YYYY#-#MM#-#DD#.log' ],
+        },
     };
 };
