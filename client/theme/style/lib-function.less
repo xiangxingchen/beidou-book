@@ -1,0 +1,393 @@
+@charset "utf-8";
+.lessTransform(@lessTransform:scale(1)) {
+  -webkit-transform: @lessTransform;
+  -moz-transform: @lessTransform;
+  -ms-transform: @lessTransform;
+  -o-transform: @lessTransform;
+  transform: @lessTransform;
+}
+
+.lessTransformOrigin(@lessTransformOrigin:0 0) {
+  -webkit-transform-origin: @lessTransformOrigin;
+  -moz-transform-origin: @lessTransformOrigin;
+  -ms-transform-origin: @lessTransformOrigin;
+  -o-transform-origin: @lessTransformOrigin;
+  transform-origin: @lessTransformOrigin;
+}
+
+.lessdelay(@lessTransition:all 1s ease) {
+  -webkit-transition: @lessTransition;
+  -moz-transition: @lessTransition;
+  -ms-transition: @lessTransition;
+  -o-transition: @lessTransition;
+  transition: @lessTransition;
+}
+
+.lessTransition(@lessTransition:all 0.3s ease) {
+  -webkit-transition: @lessTransition;
+  -moz-transition: @lessTransition;
+  -ms-transition: @lessTransition;
+  -o-transition: @lessTransition;
+  transition: @lessTransition;
+}
+
+.lessAnimationMulti( @opt1,@opt2) {
+  -webkit-animation: @opt1, @opt2;
+  -moz-animation: @opt1, @opt2;
+  -ms-animation: @opt1, @opt2;
+  -o-animation: @opt1, @opt2;
+  transition: @opt1, @opt2;
+}
+
+//animation:[<animation-name> || <animation-duration> || <animation-timing-function> || <animation-delay> || <animation-iteration-count> || <animation-direction>] || animation-fill-mode]
+//如：.lessAnimation(ani, 3s, ease, 0.8s, infinite, normal, both);
+.lessAnimation(@animation-name,@animation-duration,@animation-timing-function,@animation-delay,@animation-iteration-count,@animation-direction,@animation-fill-mode) {
+  animation: @arguments;
+  -moz-animation: @arguments;
+  -ms-animation: @arguments;
+  -webkit-animation: @arguments;
+  -o-animation: @arguments;
+}
+
+.lessAnimationSet(@arguments:none) {
+  animation: @arguments;
+  -moz-animation: @arguments;
+  -ms-animation: @arguments;
+  -webkit-animation: @arguments;
+  -o-animation: @arguments;
+}
+
+.lessAnimationPlayState(@arguments:play) {
+  -webkit-animation-play-state: @arguments;
+  -ms-animation-play-state: @arguments;
+  -moz-animation-play-state: @arguments;
+  -o-animation-play-state: @arguments;
+  animation-play-state: @arguments;
+}
+
+// Drop shadows
+.box-shadow(@shadow) {
+  -webkit-box-shadow: @shadow; // iOS <4.3 & Android <4.1
+  -ms-shadow: @shadow; // iOS <4.3 & Android <4.1
+  -moz-shadow: @shadow; // iOS <4.3 & Android <4.1
+  -o-shadow: @shadow; // iOS <4.3 & Android <4.1
+  box-shadow: @shadow;
+}
+
+.backface-visibility(@arguments:hidden) {
+  -webkit-backface-visibility: @arguments;
+  backface-visibility: @arguments;
+}
+
+// Box sizing
+.box-sizing(@boxmodel) {
+  -webkit-box-sizing: @boxmodel;
+  -moz-box-sizing: @boxmodel;
+  -ms-box-sizing: @boxmodel;
+  -o-box-sizing: @boxmodel;
+  box-sizing: @boxmodel;
+}
+
+// User select
+// For selecting text on the page
+.user-select(@select) {
+  -webkit-user-select: @select;
+  -moz-user-select: @select;
+  -ms-user-select: @select; // IE10+
+  -o-user-select: @select;
+  user-select: @select;
+}
+
+.appearance(@appearance) {
+  -webkit-appearance: @appearance;
+  -ms-appearance: @appearance;
+  -moz-appearance: @appearance;
+  appearance: @appearance;
+}
+
+.backface-visibility(@param) {
+  -webkit-backface-visibility: @param;
+  backface-visibility: @param;
+}
+
+//循环构建构建 ml10-ml100
+.createML (@value) when (@value > 0) {
+  .ml@{value} {
+    margin-left: ~"@{value}px";
+  }
+  // 递归
+  .createML(@value - 5);
+}
+
+//.createML(100);
+//循环构建构建 mr10-mr100
+.createMR (@value) when (@value > 0) {
+  .mr@{value} {
+    margin-right: ~"@{value}px";
+  }
+  // 递归
+  .createMR(@value - 5);
+}
+
+//.createMR(100);
+//动态创建keyframe
+#createKeyFrames(@name; @frames) {
+  @-webkit-keyframes @name {
+    @vendor: -webkit-;
+    @frames();
+  }
+  @-moz-keyframes @name {
+    @vendor: -moz-;
+    @frames();
+  }
+  @-ms-keyframes @name {
+    @vendor: -ms-;
+    @frames();
+  }
+  @-o-keyframes @name {
+    @vendor: -o-;
+    @frames();
+  }
+  @keyframes @name {
+    @vendor: ~'';
+    @frames();
+  }
+}
+
+@myAni: { 10% {
+  #rotate(14deg);
+} 100% {
+    #rotate(0deg);
+  } };
+#rotate(@deg) {
+    @{vendor}transform: rotate(@deg);
+}
+
+//定义为flexbox的"父元素"
+.flex-cont() {
+  display: box;
+  display: -webkit-box; /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box; /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox; /* TWEENER - IE 10 */
+  display: -webkit-flex; /* NEW - Chrome */
+  display: flex;
+}
+
+.flex-info-center() {
+  box-align: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+//兼容问题，flex-start和flex-end旧版本为start,end
+.flex-info-align(@param) {
+  box-align: @param;
+  -webkit-box-align: @param;
+  -webkit-align-items: @param;
+  align-items: @param;
+}
+
+.flex-info-align (@param) when (@param = flex-start) {
+  box-align: start;
+  -webkit-box-align: start;
+  -webkit-align-items: @param;
+  align-items: @param;
+}
+
+.flex-info-align (@param:center) when (@param = flex-end) {
+  box-align: end;
+  -webkit-box-align: end;
+  -webkit-align-items: @param;
+  align-items: @param;
+}
+
+//flex-direction兼容方案
+//.flex-direction(@param:row) {
+//  -webkit-flex-direction: @param;
+//  flex-direction: @param;
+//  //2017.11.10 兼容旧版本浏览器
+//  -webkit-box-orient:horizontal;
+//  -moz-box-orient:horizontal;
+//  -webkit-box-direction:normal;
+//  -moz-box-direction:normal;
+//}
+
+.flex-direction (@param) when (@param = column) {
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -moz-box-direction: normal;
+  flex-direction: column;
+  -webkit-flex-direction: column;
+}
+
+.flex-direction (@param:center) when (@param = row) {
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -moz-box-direction: normal;
+  flex-direction: row;
+  -webkit-flex-direction: row;
+}
+
+//给"子元素"赋予自由伸缩的能力
+.flex-item(@number:1) {
+  -moz-box-flex: @number;
+  -webkit-box-flex: @number;
+  -webkit-flex: @number;
+  flex: @number;
+  //2017.11.10 兼容旧版本浏览器
+  box-flex: @number;
+  -webkit-box-flex: @number;
+}
+
+//2017.11.10 兼容旧版本浏览器
+.align-items(@param:stretch) {
+  box-align: @param;
+  -webkit-box-align: @param;
+  -webkit-align-items: @param;
+  align-items: @param;
+}
+
+.align-items (@param) when (@param = flex-start) {
+  box-align: start;
+  -webkit-box-align: start;
+  -webkit-align-items: @param;
+  align-items: @param;
+}
+
+.align-items (@param:center) when (@param = flex-end) {
+  box-align: end;
+  -webkit-box-align: end;
+  -webkit-align-items: @param;
+  align-items: @param;
+}
+
+.align-self(@param:stretch) {
+  -webkit-align-self: @param;
+  align-self: @param;
+}
+
+//适应内容
+.justify-content(@param:center) {
+  justify-content: @param;
+  -webkit-justify-content: @param;
+  //2017.11.10 兼容旧版本浏览器
+  box-pack: @param;
+  -moz-box-pack: @param;
+  -webkit-box-pack: @param;
+  box-align: @param;
+  -webkit-box-align: @param;
+}
+
+.justify-content (@param:center) when (@param = flex-start) {
+  justify-content: @param;
+  -webkit-justify-content: @param;
+  box-pack: start;
+  -moz-box-pack: start;
+  -webkit-box-pack: start;
+}
+
+.justify-content (@param:center) when (@param = flex-end) {
+  justify-content: @param;
+  -webkit-justify-content: @param;
+  box-pack: end;
+  -moz-box-pack: end;
+  -webkit-box-pack: end;
+}
+
+.justify-content (@param:center) when (@param = space-between) {
+  justify-content: @param;
+  -webkit-justify-content: @param;
+  box-pack: justify;
+  -moz-box-pack: justify;
+  -webkit-box-pack: justify;
+}
+
+.flex-wrap(@param:wrap) {
+  -ms-flex-wrap: @param;
+  flex-wrap: @param;
+  box-lines: multiple;
+  -webkit-box-lines: multiple;
+}
+
+//伸缩盒对象的子元素超出父元素的空间时换行显示
+.flex-wrap (@param:wrap) when (@param = wrap) {
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  box-lines: multiple;
+  -webkit-box-lines: multiple;
+}
+
+//伸缩盒对象的子元素只在一行内显示
+.flex-wrap (@param:nowrap) when (@param = nowrap) {
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  box-lines: single;
+  -webkit-box-lines: single;
+}
+
+.box-pack(@param:start) {
+  -moz-box-pack: @param;
+  -webkit-box-pack: @param;
+  box-pack: @param;
+  -webkit-box-align: @param;
+}
+
+.placeholder(@rules) {
+  &::-webkit-input-placeholder {
+    @rules();
+  }
+  &:-moz-placeholder {
+    @rules();
+  }
+  &::-moz-placeholder {
+    @rules();
+  }
+  &:-ms-input-placeholder {
+    @rules();
+  }
+}
+
+//向右箭头
+.symbol-icon-arrow-right() {
+  display: inline-block;
+  border-right: 4rem/@baseNumber solid @color-gray;
+  border-top: 4rem/@baseNumber solid @color-gray;
+  width: 16rem/@baseNumber;
+  height: 16rem/@baseNumber;
+  text-indent: -999em;
+  .lessTransform(rotate(45deg));
+}
+
+//向下箭头
+.symbol-icon-arrow-down() {
+  display: inline-block;
+  border-right: 4rem/@baseNumber solid @color-gray;
+  border-top: 4rem/@baseNumber solid @color-gray;
+  width: 16rem/@baseNumber;
+  height: 16rem/@baseNumber;
+  text-indent: -999em;
+  .lessTransform(rotate(135deg));
+}
+
+//1px边框，uc浏览器不处理
+.onePx(@name) {
+  @media only screen and (-webkit-min-device-pixel-ratio: 2) {
+    @{name} {
+      border-width: 0.5px;
+    }
+
+    html.uc, html.oldAndroid {
+      @{name} {
+        border-width: 1px;
+      }
+    }
+  }
+  @media only screen and (-webkit-min-device-pixel-ratio: 3) {
+    @{name} {
+      border-width: 1px;
+    }
+  }
+}

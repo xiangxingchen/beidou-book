@@ -1,11 +1,17 @@
 import { Controller } from 'egg';
 
 export default class RoutesController extends Controller {
-  public async home() {
-    this.ctx.redirect('/user');
+  public async index() {
+    // render view template in `client/index`
+    await this.ctx.render('index', {
+      initState: { html: this.ctx.helper.getSeo('/'),
+      },
+    });
   }
-
-  public async show() {
-    await this.ctx.render('/index');
+  public async ui() {
+    await this.ctx.render('index', {
+      initState: { html: this.ctx.helper.getSeo('/ui'),
+      },
+    });
   }
 }

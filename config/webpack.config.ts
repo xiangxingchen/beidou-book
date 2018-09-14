@@ -5,6 +5,7 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import ManifestPlugin from 'webpack-manifest-plugin';
 
 /* tslint:disable */
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const autoprefixer = require('autoprefixer');
 const pxtorem = require('postcss-pxtorem');
 const cssnano = require('cssnano');
@@ -14,7 +15,7 @@ const postcssOpts = {
     autoprefixer({
       browsers: ['last 2 versions', 'Firefox ESR', '> 1%', 'ie >= 8', 'iOS >= 8', 'Android >= 4'],
     }),
-    pxtorem({ rootValue: 64, propWhiteList: [] })
+    pxtorem({ rootValue: 75, propWhiteList: [] })
   ],
   cssnano
 };
@@ -32,9 +33,9 @@ module.exports = (app, defaultConfig, dev) => {
             })
         );
       defaultConfig.output = {
-        path: path.join(__dirname, '../app/public'),
+        path: path.join(__dirname, '../app/build'),
         filename: '[name].js',
-        publicPath: '/public/',
+        publicPath: '/build/',
         chunkFilename: '[name].[chunkhash:8].chunk.js'
       };
     } else {
@@ -49,22 +50,24 @@ module.exports = (app, defaultConfig, dev) => {
                 'process.env': {
                     NODE_ENV: JSON.stringify('production'),
                 },
-            })
+            }),
+            new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+            // new BundleAnalyzerPlugin()
         );
-      defaultConfig.plugins.push(
-        new ExtractTextPlugin('[name].[contenthash].css')
-      );
-      defaultConfig.plugins.push(
-        new ManifestPlugin({
-          fileName: 'manifest.json',
-          manifestVariable: "webpackManifest",
-          writeToFileEmit: true,
-        }),
-      );
+        defaultConfig.plugins.push(
+          new ExtractTextPlugin('[name].[contenthash].css')
+        );
+        defaultConfig.plugins.push(
+          new ManifestPlugin({
+            fileName: 'manifest.json',
+            manifestVariable: "webpackManifest",
+            writeToFileEmit: true,
+          }),
+        );
       defaultConfig.output = {
-        path: path.join(__dirname, '../app/public'),
+        path: path.join(__dirname, '../app/build'),
         filename: '[name].[chunkhash:8].js',
-        publicPath: '/public/',
+        publicPath: '/build/',
         chunkFilename: '[name].[chunkhash:8].chunk.js'
       };
     }
@@ -147,10 +150,7 @@ module.exports = (app, defaultConfig, dev) => {
                     },
                 ],
             ],
-            plugins: [
-              'transform-runtime',
-              [ 'import', { libraryName: 'antd-mobile', style: true } ],
-            ],
+            plugins: [],
             env: {
                 development: {
                     plugins: ['module:react-hot-loader/babel'],
@@ -168,12 +168,9 @@ module.exports = (app, defaultConfig, dev) => {
       loader: 'postcss-loader',
       options: postcssOpts
     };
-
-    defaultConfig.output = {
-        path: path.join(__dirname, '../app/public'),
-        filename: '[name].js',
-        publicPath: '/build/',
-        chunkFilename: '[name].[chunkhash].js'
+    defaultConfig.module.rules[6].use[3] = {
+      loader: 'postcss-loader',
+      options: postcssOpts
     };
 
     return defaultConfig;

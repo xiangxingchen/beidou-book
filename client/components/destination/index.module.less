@@ -1,0 +1,59 @@
+.destination {
+  background: #fff;
+  height: 100%;
+  width: 750px;
+  display: flex;
+  flex-direction: column;
+  &__hd {
+  }
+  &__bd {
+    flex: 1;
+    display: flex;
+    &_content {
+      flex: 1;
+      display: flex;
+      width: 100%;
+      overflow: auto;
+    }
+    &_nav {
+      width: 200px;
+      background: #f1f1f1;
+      &_item {
+        line-height: 100px;
+        padding-left: 50px;
+        font-size: 30px;
+        &_current {
+          background: #fff;
+          border-left: 5px solid #ff0000;
+          padding-left: 45px;
+          color: #ff0000;
+        }
+      }
+    }
+    &_list {
+      flex: 1;
+      &_item {
+        &_icon {
+          color: #ff0000;
+        }
+      }
+    }
+  }
+  &__ft {
+    border-top: 1PX solid #f1f1f1;
+    overflow: hidden;
+    line-height: 90px;
+    &_button {
+      float: right;
+    }
+    &_text {
+      padding: 0 20px;
+      font-size: 30px;
+      em {
+        font-style: normal;
+        color: #ff0000;
+        margin: 0 5px;
+      }
+    }
+  }
+}

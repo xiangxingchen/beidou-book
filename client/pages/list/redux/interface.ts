@@ -2,7 +2,7 @@ interface UserState {
   name: string;
 }
 
-interface UserPropsType  {
+interface UserPropsType {
   user: UserState;
   onViewInit: () => () => void;
   vali?: boolean;

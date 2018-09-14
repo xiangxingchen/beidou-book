@@ -1,7 +1,7 @@
 {
-  "name": "beidou-douban",
-  "version": "1.0.8",
-  "description": "beidou-douban",
+  "name": "beidou-one",
+  "version": "1.0.0",
+  "description": "beidou-one",
   "egg": {
     "typescript": true
   },
@@ -9,7 +9,7 @@
     "start": "beidou start --workers=1",
     "debug": "beidou debug --inspect-brk",
     "stop": "beidou stop",
-    "dev": "beidou dev --port 8888",
+    "dev": "beidou dev",
     "build:server": "ets && tsc -p tsconfig-server.json",
     "build:client": "beidou build",
     "build": "npm run build:client && npm run build:server",
@@ -45,13 +45,17 @@
     "js-cookie": "^2.2.0",
     "lodash": "^4.17.10",
     "moment": "^2.22.2",
+    "normalize-css": "^2.3.1",
     "postcss-pxtorem": "^4.0.1",
     "react": "^16.2.0",
+    "react-custom-scrollbars": "^4.2.1",
+    "react-decoration": "^2.0.0",
     "react-dom": "^16.2.0",
     "react-hot-loader": "^4.3.3",
     "react-loadable": "^5.5.0",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
+    "react-svg": "^6.0.6",
     "redux": "^4.0.0",
     "redux-actions": "^2.6.1",
     "redux-saga": "^0.16.0",
@@ -60,6 +64,7 @@
     "typescript": "^2.7.2"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.116",
     "@types/react": "^16.4.6",
     "css-loader": "^1.0.0",
     "less": "^3.8.1",
@@ -68,6 +73,8 @@
     "tslint": "^5.11.0",
     "tslint-eslint-rules": "^5.4.0",
     "tslint-react": "^3.6.0",
-    "webpack": "^3.12.0"
+    "webpack": "^3.12.0",
+    "webpack-bundle-analyzer": "^2.13.1",
+    "webpack-manifest-plugin": "^2.0.3"
   }
 }

@@ -2,9 +2,10 @@ import * as path from 'path';
 
 module.exports = appInfo => {
    return {
+       keys: 'secret',
        static: {
-           prefix: '/public/',
-           dir: path.join(appInfo.baseDir, 'app/public'),
+           prefix: '/build/',
+           dir: path.join(appInfo.baseDir, 'app/build'),
            dynamic: false,
            preload: true,
        },

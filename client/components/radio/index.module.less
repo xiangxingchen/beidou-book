@@ -1,0 +1,27 @@
+@import '../../theme/style/lib-function';
+
+.x-radio {
+  display: table;
+  padding: 0 12px;
+  min-width: 164px;
+  max-width: 164px;
+  height: 82px;
+  line-height: 28px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #999;
+  .appearance(none);
+
+  &:after {
+    display: table-cell;
+    font-size: 26px;
+    content: attr(data-text);
+    vertical-align: middle;
+    text-align: center;
+  }
+  &:checked {
+    color: #f75730;
+    border-color: #f75730;
+  }
+}

@@ -4,14 +4,22 @@ import { Provider } from 'react-redux';
 import { StaticRouter } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
 import configureStore from './configureStore';
-import Layout from './layout/index';
 import routes from './routes';
-import './theme/index.less';
+import './theme/stylesheet/index.less';
 
 const Router = __CLIENT__ ? BrowserRouter : StaticRouter;
 
 interface IViewProps {
   asset: (e?: string) => string;
+  assetWithHash: (asset: string) => string;
+}
+
+interface Html {
+  html: {
+    title: string;
+    desc: string;
+    keywords: string;
+  };
 }
 
 interface InterfaceIC {
@@ -20,19 +28,17 @@ interface InterfaceIC {
   html: string;
   state: string;
   asset?: string;
+  initState: Html;
 }
 
 export default class RouteView extends React.Component<InterfaceIC> {
   private static doctype = '<!DOCTYPE html>';
   private static defaultProps = {
-    title: 'dashboard',
     asset: 'main',
   };
 
-  private static async getStore({ ctx }) {
-    const store = configureStore({});
-    const users = await ctx.service.user.findAll();
-    return store;
+  private static getStore({ initState }) {
+    return configureStore(initState);
   }
 
   private static getPartial({ store, ctx }) {
@@ -51,7 +57,7 @@ export default class RouteView extends React.Component<InterfaceIC> {
     const html = (
       <Provider store={store}>
         <Router {...props}>
-          <Layout>{routes}</Layout>
+          {routes}
         </Router>
       </Provider>
     );
@@ -60,7 +66,7 @@ export default class RouteView extends React.Component<InterfaceIC> {
   }
 
   public render() {
-    const { title, html, state, helper } = this.props;
+    const { title, html, state, helper, initState } = this.props;
     const indexJs = __DEV__ ? helper.asset('index.js') : helper.assetWithHash('index.js');
     const indexCss = __DEV__ ? helper.asset('index.css') : helper.assetWithHash('index.css');
     return (
@@ -69,13 +75,13 @@ export default class RouteView extends React.Component<InterfaceIC> {
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-        <meta
-          name="description"
-          content="A admin dashboard application demo built upon Ant Design and Beidou"
-        />
-        <title>{title}</title>
-        <script src="https://m.xyz.cn/xyz/dist/js/base/flexible.js" />
+        <meta name="keywords" content={initState.html.keywords} />
+        <meta name="description" content={initState.html.desc} />
+        <title>{initState.html.title}</title>
+        <script src="/build/static/javascript/flexible.js" />
+        <link rel="stylesheet" href="/build/static/icon-font/iconfont.css" />
         <link rel="stylesheet" href={indexCss} />
+        <script src="/build/static/icon-font-colorful/iconfont.js"/>
       </head>
       <body>
       <div id="container" dangerouslySetInnerHTML={{ __html: html }} />
@@ -101,7 +107,7 @@ if (__CLIENT__) {
   const app = (
     <Provider store={store}>
       <Router>
-        <Layout>{routes}</Layout>
+        {routes}
       </Router>
     </Provider>
   );

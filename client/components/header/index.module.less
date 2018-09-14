@@ -1,0 +1,59 @@
+.navBar {
+  position: relative;
+  z-index: 700;
+  &__iconfont {
+    font-size: 42px;
+    margin-left: 15px;
+    color: #666;
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}
+.mini__nav {
+  &_list {
+    display: flex;
+    background: #eee;
+  }
+  &_item {
+    flex: 1;
+    text-align: center;
+    a {
+      display: block;
+      padding: 20px 0;
+      color: #666;
+    }
+  }
+}
+
+.category_list {
+  background: #fff;
+  padding: 0 20px;
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+  &__item {
+    line-height: 88px;
+    border-bottom: 1PX solid #d9d9d9;
+    font-size: 28px;
+    width: 50%;
+    margin-bottom: -1PX;
+    a {
+      color: #333;
+      display: block;
+    }
+  }
+  &__text {
+    padding-left: 20px;
+    vertical-align: middle;
+  }
+  &__icon {
+    font-size: 48px;
+    vertical-align: middle;
+  }
+}
+
+.search__panel {
+  left: 0;
+  background: #fff;
+}

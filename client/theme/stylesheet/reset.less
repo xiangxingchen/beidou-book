@@ -1,0 +1,40 @@
+body {
+  margin: 0;
+  font-family: PingFangSC,helvetica,'Heiti SC';
+  line-height: 1.6;
+}
+
+ul, dl, dt, dd {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+a {
+  &:link {
+    color: @gray-darker;
+    text-decoration: none;
+  }
+  &:visited {
+    color: @gray-darker;
+  }
+  &:active {
+    color: @primary;
+  }
+  &.link-light {
+    &:link {
+      color: @gray-light;
+      text-decoration: none;
+    }
+    &:visited {
+      color: @gray-light;
+    }
+    &:active {
+      color: @primary;
+    }
+  }
+}
+
+input[type=checkbox] {
+  margin: 0;
+}

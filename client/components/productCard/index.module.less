@@ -1,0 +1,131 @@
+@import '../../theme/style/lib-function';
+
+.productCard {
+  &__insurePlan {
+    margin-top: 22px;
+    margin-bottom: 32px;
+  }
+}
+
+.title {
+  margin: 0 0 24px;
+  overflow: hidden;
+  font-size: 34px;
+  font-weight: normal;
+  color: #333;
+  font-family: "PingFangSC";
+}
+
+.tag {
+  margin: 0 12px 24px 0;
+  padding: 4px 10px;
+  border: .5px solid #999;
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  line-height: 1;
+  font-size: 26px;
+}
+
+.brand {
+  width: 140px!important;
+  height: auto!important;
+}
+
+.price {
+  &__info {
+    font-size: 48px;
+    font-family: Arial;
+    color: #f75730;
+
+    &:before {
+      font-size: 26px;
+      padding-right: 2px;
+      content: '¥';
+    }
+  }
+
+  &__extra {
+    font-size: 26px;
+    color: #999;
+  }
+}
+.description {
+  display: flex;
+  flex-wrap: wrap;
+  color: #999;
+  font-size: 26px;
+
+  &__item {
+    max-width: 50%;
+    overflow: hidden;
+    flex-grow: 1;
+  }
+
+  &__item:nth-of-type(odd) {
+    text-overflow: ellipsis;
+  }
+
+  &__item:nth-of-type(even) {
+    padding-left: 22px;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    white-space: normal;
+    text-align: right;
+  }
+}
+
+.explain {
+  position: relative;
+  margin-top: 32px;
+  padding-top: 30px;
+  border-top: 1px solid #d9d9d9;
+
+  &__items {
+    overflow: hidden;
+    max-height: 110px;
+    font-size: 26px;
+    line-height: 36px;
+    color: #333;
+
+    li {
+      display: flex;
+      align-content: space-between;
+      list-style: none;
+      & > span {
+        flex-grow: 1;
+      }
+      & > span:last-child {
+        text-align: right;
+      }
+    }
+  }
+  &__icon {
+    display: block;
+    position: absolute;
+    top: -22px;
+    right: 0;
+    width: 44px;
+    height: 44px;
+    content: '';
+    background: url(../../../app/build/img/arrow.png) no-repeat left center;
+    background-size: 100%;
+    z-index: 1;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+  }
+}
+
+.active {
+  .explain {
+    &__items {
+      height: auto;
+      max-height: unset;
+      overflow: visible;
+    }
+    &__icon {
+      -webkit-transform: rotateZ(180deg);
+      transform: rotateZ(180deg);
+    }
+  }
+}

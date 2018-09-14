@@ -1,18 +1,29 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { hot } from 'react-hot-loader';
-import { Icon, Button, Checkbox } from 'antd-mobile';
+import { Button } from 'antd-mobile';
+import { defaultProps, computedProps } from 'react-decoration';
 import _ from 'lodash';
 import moment from 'moment';
-import style from './index.module.less';
+import Header from '../../components/header';
 import { userInit, onViewInit } from './redux/actions';
 import { UserPropsType } from './redux/interface';
+import classNames from 'classnames/bind';
+import style from './index.module.less';
+const cx = classNames.bind(style);
+import { hot } from 'react-hot-loader';
 
 interface State {
   modal: boolean;
 }
-
+@defaultProps({
+  foo: 'bar',
+})
+@connect((state, props) => ({ user: state.user }), { onViewInit, userInit })
+@computedProps({
+  fullName: ({ foo, user }) => `${foo} ${user.name}`,
+})
 class User extends React.Component<UserPropsType, State> {
+  protected aa = '123';
   constructor(props: UserPropsType) {
     super(props);
     this.state = {
@@ -22,34 +33,22 @@ class User extends React.Component<UserPropsType, State> {
 
   public componentDidMount() {
     this.props.onViewInit();
-    console.log(this.props.user.name);
     const a: boolean = _.isArray('ddd');
     const b: string = moment(new Date()).format('YYYY-MM-DD');
-    console.log('--------------componentDidMount----------------', a, b);
   }
 
   public render() {
     return (
       <div>
-        <Button>这是一个button hh</Button>
-        <div className={style.red}>user</div>
+        <Header title={'新一站保险网'} showMiniNavBtn={true} showSearchBtn={true} showCategoryBtn={true}/>
+        <Button className={style.blue}>这是一个button</Button>
+        <div>user f</div>
+        <div>{this.aa}</div>
         <div>{this.state.modal}</div>
-        <div className="title_a">user-a</div>
+        <div className={cx('title_a')}>user-a</div>
       </div>
     );
   }
 }
 
-function mapStateToProps(state, props) {
-  return {
-     user: state.user,
-  };
-}
-
-const mapDispatchToProps = {
-  onViewInit,
-  userInit,
-};
-
-const UserCont = connect(mapStateToProps, mapDispatchToProps)(User);
-export default hot(module)(UserCont);
+export default hot(module)(User);

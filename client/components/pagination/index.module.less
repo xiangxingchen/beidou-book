@@ -1,0 +1,46 @@
+@import '../../theme/style/lib-function';
+
+.pagination {
+  display: flex;
+  margin-top: 0.3125rem;
+  background-color: white;
+  color: #333;
+
+  &__item {
+    line-height: 98px;
+    flex-grow: 1;
+    border: 1px solid #d9d9d9;
+    text-align: center;
+  }
+
+  &__item:first-child, &__item:last-child {
+    border-left: 0;
+    border-right: 0;
+  }
+  &__icon {
+    padding-left: 16px;
+    font-size: 12px;
+  }
+}
+
+.pageSelect {
+  position: relative;
+
+  &__select {
+    position: absolute;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+
+    font-weight: 400;
+    font-size: 100%;
+  }
+}
+
+
+.no-more {
+  color: #d9d9d9;
+}

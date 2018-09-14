@@ -4,7 +4,7 @@ import cookie from 'js-cookie';
 const instance = axios.create({
   baseURL: '/api/',
   timeout: 3000,
-  headers: { 'x-csrf-token': cookie.get('csrfToken') },
+  headers: {'x-csrf-token': cookie.get('csrfToken')},
 });
 
 instance.interceptors.request.use((config) => {
