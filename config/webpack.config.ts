@@ -38,6 +38,7 @@ module.exports = (app, defaultConfig, dev) => {
         publicPath: '/build/',
         chunkFilename: '[name].[chunkhash:8].chunk.js'
       };
+      defaultConfig.devtool = 'source-map';
     } else {
         defaultConfig.plugins.push(
             new webpack.DefinePlugin({
