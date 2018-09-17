@@ -1,12 +1,13 @@
 import UserStore from './pages/list/redux/userStore';
 const INIT_STATE = {
-  userStore: undefined,
+  currentUser: '234',
+  data: [],
 };
 
-function store(initState = INIT_STATE) {
+function rootStore(initState) {
   return {
-    userStore: new UserStore(),
+    userStore: new UserStore(initState),
   };
 }
 
-export default store;
+export { rootStore };

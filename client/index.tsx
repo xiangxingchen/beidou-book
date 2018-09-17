@@ -1,12 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import { Provider } from 'react-redux';
 import { StaticRouter } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
-import configureStore from './configureStore';
 import routes from './routes';
 import './theme/stylesheet/index.less';
-import stores from './store';
+import { rootStore } from './store';
 import { Provider } from 'mobx-react';
 const Router = __CLIENT__ ? BrowserRouter : StaticRouter;
 
@@ -38,9 +36,10 @@ export default class RouteView extends React.Component<InterfaceIC> {
     asset: 'main',
   };
 
-  private static getStore({ initState }) {
+  private static getStore({ initState, userStore }) {
     // return configureStore(initState);
-    return stores();
+    console.log('userStore', userStore);
+    return rootStore(userStore);
   }
 
   private static getPartial({ store, ctx }) {
@@ -105,7 +104,8 @@ export default class RouteView extends React.Component<InterfaceIC> {
  * only run in client side
  */
 if (__CLIENT__) {
-  const store = stores(window.__INITIAL_STATE__);
+  const store = rootStore(window.__INITIAL_STATE__);
+  console.log('__CLIENT__', store);
   const app = (
     <Provider {...store}>
       <Router>
