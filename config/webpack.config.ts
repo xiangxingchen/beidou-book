@@ -111,6 +111,8 @@ module.exports = (app, defaultConfig, dev) => {
                                 regenerator: true,
                             },
                         ],
+                      ['@babel/plugin-proposal-decorators',{ "legacy": true}],
+                      ['@babel/plugin-proposal-class-properties', {"loose": true}],
                     ],
                     env: {
                         development: {

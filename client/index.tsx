@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
+// import { Provider } from 'react-redux';
 import { StaticRouter } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
 import configureStore from './configureStore';
 import routes from './routes';
 import './theme/stylesheet/index.less';
-
+import stores from './store';
+import { Provider } from 'mobx-react';
 const Router = __CLIENT__ ? BrowserRouter : StaticRouter;
 
 interface IViewProps {
@@ -38,7 +39,8 @@ export default class RouteView extends React.Component<InterfaceIC> {
   };
 
   private static getStore({ initState }) {
-    return configureStore(initState);
+    // return configureStore(initState);
+    return stores();
   }
 
   private static getPartial({ store, ctx }) {
@@ -55,7 +57,7 @@ export default class RouteView extends React.Component<InterfaceIC> {
       };
     }
     const html = (
-      <Provider store={store}>
+      <Provider {...store}>
         <Router {...props}>
           {routes}
         </Router>
@@ -103,9 +105,9 @@ export default class RouteView extends React.Component<InterfaceIC> {
  * only run in client side
  */
 if (__CLIENT__) {
-  const store = configureStore(window.__INITIAL_STATE__);
+  const store = stores(window.__INITIAL_STATE__);
   const app = (
-    <Provider store={store}>
+    <Provider {...store}>
       <Router>
         {routes}
       </Router>

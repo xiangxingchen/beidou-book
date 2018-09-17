@@ -1,6 +1,9 @@
 import React from 'react';
 import { Route, Switch } from 'react-router';
+import { Link } from 'react-router-dom';
+import DevTools from 'mobx-react-devtools';
 import Loadable from 'react-loadable';
+import { hot } from 'react-hot-loader';
 
 import Users from './pages/list/user';
 import UI from './pages/ui/ui';
@@ -9,10 +12,22 @@ import UI from './pages/ui/ui';
 //   loader: () => import('./pages/list/user'),
 //   loading: () => <div>loading</div>,
 // });
+// const hotComponent = (com) => hot(module)(com);
 
 export default (
+  <div>
+    <div>
+      <div>
+      <Link to="/">首页</Link>
+      </div>
+      <div>
+      <Link to="/ui">UI</Link>
+      </div>
+    </div>
   <Switch>
     <Route exact path="/" component={Users} />
     <Route exact path="/ui" component={UI} />
   </Switch>
+  <DevTools />
+  </div>
 );
