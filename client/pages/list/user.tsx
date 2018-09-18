@@ -18,9 +18,7 @@ interface State {
 }
 @inject('userStore')
 @observer
-@defaultProps({
-  foo: 'bar',
-})
+@defaultProps({ foo: 'bar' })
 class User extends React.Component<UserPropsType, State> {
   protected aa = '123';
   constructor(props: UserPropsType) {
@@ -35,6 +33,7 @@ class User extends React.Component<UserPropsType, State> {
     const b: string = moment(new Date()).format('YYYY-MM-DD');
   }
   public onClick = (): void => {
+    // this.props.userStore.currentUser = 'dddd';
     this.props.userStore.getData();
   }
 
