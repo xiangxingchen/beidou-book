@@ -6,20 +6,12 @@ const INIT_USER_STORE = {
   data: [ 1 ],
 };
 
-const person = observable({
-  name: 'cx',
-});
-const son = observable.map({
-  name: 'son',
-});
-
 class UserStore {
 
   @observable public currentUser: string;
   @observable public data: number [];
 
-  constructor(store) {
-    console.log('store', store);
+  constructor(store = INIT_USER_STORE) {
     this.currentUser = store.currentUser;
     this.data = store.data;
   }
@@ -31,11 +23,9 @@ class UserStore {
     this.currentUser = user;
   }
   @action public getData(): void {
-    son.set('name', 'new value');
     axios.get('/api/user')
       .then((res) => {
         this.data = res.data;
-        console.log('res', res);
       })
       .catch((err) => console.log('------------', err));
   }

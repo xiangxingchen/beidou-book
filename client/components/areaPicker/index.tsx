@@ -166,9 +166,6 @@ class AreaPicker extends React.Component<Props, State> {
   public renderList = () => {
     // 获取当前数据的兄弟数据合集
     const listData = this.getTreeBrothers(this.state.data, this.state.select[this.state.tabIndex].code);
-    console.log(111111111111111);
-    console.log(this.state.select);
-    console.log(listData);
     return (
       listData.map(item => {
         return (

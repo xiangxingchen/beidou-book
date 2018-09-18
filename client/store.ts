@@ -1,12 +1,11 @@
 import UserStore from './pages/list/redux/userStore';
-const INIT_STATE = {
-  currentUser: '234',
-  data: [],
-};
+import UiStore from './pages/ui/uiStore';
 
 function rootStore(initState) {
+  const { userStore, uiStore } = initState;
   return {
-    userStore: new UserStore(initState),
+    userStore: new UserStore(userStore),
+    uiStore: new UiStore(uiStore),
   };
 }
 

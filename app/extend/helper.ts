@@ -7,7 +7,6 @@ module.exports = {
       if (fs.existsSync(mainfestFile)) {
         const raw = fs.readFileSync(mainfestFile, 'utf-8');
         const data = JSON.parse(raw);
-        console.log('raw', asset, data[asset]);
         return data[asset];
       }
     } catch (e) {

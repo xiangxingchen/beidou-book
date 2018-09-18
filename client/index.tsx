@@ -36,10 +36,8 @@ export default class RouteView extends React.Component<InterfaceIC> {
     asset: 'main',
   };
 
-  private static getStore({ initState, userStore }) {
-    // return configureStore(initState);
-    console.log('userStore', userStore);
-    return rootStore(userStore);
+  private static getStore({ initState }) {
+    return rootStore(initState);
   }
 
   private static getPartial({ store, ctx }) {
@@ -105,7 +103,6 @@ export default class RouteView extends React.Component<InterfaceIC> {
  */
 if (__CLIENT__) {
   const store = rootStore(window.__INITIAL_STATE__);
-  console.log('__CLIENT__', store);
   const app = (
     <Provider {...store}>
       <Router>

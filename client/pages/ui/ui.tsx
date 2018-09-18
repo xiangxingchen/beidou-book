@@ -1,17 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { List, Toast, Modal, Icon, Button, Checkbox, WhiteSpace, SegmentedControl } from 'antd-mobile';
+import { hot } from 'react-hot-loader';
+import { inject, observer } from 'mobx-react';
+import { List, Toast, Modal, WhiteSpace, SegmentedControl } from 'antd-mobile';
 import Destination from '../../components/destination';
 import { destinationData } from '../../components/destination/data';
 import AreaPicker from '../../components/areaPicker';
 import Header from '../../components/header';
 import Footer from '../../components/footer';
-import { hot } from 'react-hot-loader';
 
 const Item = List.Item;
 
 interface Props {
   modal?: boolean;
+  ui: string;
 }
 
 interface SelectedItemObject {
@@ -25,6 +27,8 @@ interface State {
   destinationSeleted: [SelectedItemObject];
 }
 
+@inject('uiStore')
+@observer
 class UI extends React.Component<Props, State> {
 
   constructor(props) {
