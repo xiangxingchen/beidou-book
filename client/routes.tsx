@@ -16,14 +16,6 @@ import UI from './pages/ui/ui';
 
 export default (
   <div>
-    <div>
-      <div>
-      <Link to="/">首页</Link>
-      </div>
-      <div>
-      <Link to="/ui">UI</Link>
-      </div>
-    </div>
   <Switch>
     <Route exact path="/" component={Users} />
     <Route exact path="/ui" component={UI} />

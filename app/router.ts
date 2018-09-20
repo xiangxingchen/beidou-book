@@ -5,6 +5,8 @@ export default (app: Application) => {
 
  // api
   router.resources('user', '/api/user', controller.user);
+  router.resources('getGender', '/api/getGender', controller.novel.getGender);
+
 
   // pages
   router.get('/ui', controller.routes.ui);

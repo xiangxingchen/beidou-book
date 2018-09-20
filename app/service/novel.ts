@@ -23,7 +23,8 @@ export default class NovelService extends Service {
    * 2、获取排行榜类型
    */
   public async getGender() {
-    return this.ctx.curl('http://api.zhuishushenqi.com/ranking/gender');
+    const { data } = await  this.ctx.curl('http://api.zhuishushenqi.com/ranking/gender');
+    return JSON.parse(data.toString());
   }
 
   /**
