@@ -32,7 +32,8 @@ export default class NovelService extends Service {
    * @param rankId
    */
   public async getRankById(rankId: string) {
-    return this.ctx.curl(`http://api.zhuishushenqi.com/ranking/${rankId}`);
+    const { data } = await this.ctx.curl(`http://api.zhuishushenqi.com/ranking/${rankId}`);
+    return JSON.parse(data.toString()).ranking;
   }
 
   /**

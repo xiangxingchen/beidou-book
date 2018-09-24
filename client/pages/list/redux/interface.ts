@@ -38,11 +38,11 @@ interface FemaleItem {
   bookCover: string[];
 }
 interface PictureItem {
-  name: string;
-  bookCount: number;
-  monthlyCount: number;
-  icon: string;
-  bookCover: string[];
+  title: string;
+  shortTitle: string;
+  cover: string;
+  _id: string;
+  collapse: boolean;
 }
 interface PressItem {
   name: string;
@@ -51,9 +51,51 @@ interface PressItem {
   icon: string;
   bookCover: string[];
 }
+interface ITabs {
+  key?: string;
+  title: string;
+  select?: boolean;
+}
+interface Book {
+  _id: string;
+  title: string;
+  author: string;
+  shortIntro: string;
+  majorCate: string;
+  minorCate: string;
+  cover: string;
+  site: string;
+  allowMonthly: boolean;
+  banned: number;
+  latelyFollower: number;
+  retentionRatio: string;
+}
+
+interface IRanking {
+  _id: string;
+  updated: string;
+  title: string;
+  tag: string;
+  cover: string;
+  icon: string;
+  __v: number;
+  shortTitle: string;
+  created: string;
+  biTag: string;
+  isSub: boolean;
+  collapse: boolean;
+  'new': boolean;
+  gender: string;
+  priority: number;
+  books: Book[];
+  id: string;
+  total: number;
+}
 
 export {
   UserState,
   UserPropsType,
   RankObject,
+  ITabs,
+  IRanking,
 };

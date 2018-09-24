@@ -8,6 +8,7 @@ import { inject, observer } from 'mobx-react';
 import { hot } from 'react-hot-loader';
 
 import { UserPropsType } from './redux/interface';
+import Rank from './../rank';
 import style from './index.module.less';
 
 const cx = classNames.bind(style);
@@ -56,7 +57,6 @@ class User extends React.Component<UserPropsType, State> {
   }
 
   public render() {
-    console.log(this.props.novelStore.rank)
     return (
       <div className={style.footer}>
         <TabBar
@@ -101,7 +101,7 @@ class User extends React.Component<UserPropsType, State> {
               });
             }}
           >
-            {this.renderContent('Friend')}
+            <Rank />
           </TabBar.Item>
           <TabBar.Item
             icon={<div className={style.tab_item4}/>}
