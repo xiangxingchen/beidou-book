@@ -56,7 +56,7 @@ interface ITabs {
   title: string;
   select?: boolean;
 }
-interface Book {
+interface IBook {
   _id: string;
   title: string;
   author: string;
@@ -87,7 +87,7 @@ interface IRanking {
   'new': boolean;
   gender: string;
   priority: number;
-  books: Book[];
+  books: IBook[];
   id: string;
   total: number;
 }
@@ -98,4 +98,5 @@ export {
   RankObject,
   ITabs,
   IRanking,
+  IBook,
 };

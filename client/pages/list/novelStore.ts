@@ -42,7 +42,7 @@ class NovelStore {
 
   public rank: RankObject;
   public tabs: ITabs[];
-  public ranking: IRanking;
+  @observable public ranking: IRanking;
   @observable public currentTab: string;
   @observable public data: number [];
 
@@ -55,6 +55,17 @@ class NovelStore {
 
   @computed get currentRank() {
     return this.rank[this.currentTab];
+  }
+  @computed
+  get books() {
+    const books = this.ranking.books;
+    if (books.length > 0) {
+      books.map(item => {
+        item.cover = item.cover.slice(7).slice(0, -3);
+        return item;
+      });
+    }
+    return books;
   }
 
   @action public setCurrentTab(tab: string): void {
