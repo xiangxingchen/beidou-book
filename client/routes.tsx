@@ -8,6 +8,7 @@ import { hot } from 'react-hot-loader';
 import Users from './pages/list/user';
 import UI from './pages/ui/ui';
 import Ranking from './pages/rank/ranking';
+import BookDetail from './pages/book/detail';
 
 // const Users = Loadable({
 //   loader: () => import('./pages/list/user'),
@@ -21,6 +22,7 @@ export default (
     <Route exact path="/" component={Users} />
     <Route exact path="/ui" component={UI} />
     <Route exact path="/ranking/:id" component={Ranking} />
+    <Route exact path="/book/:id" component={BookDetail} />
   </Switch>
   <DevTools />
   </div>

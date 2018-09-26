@@ -31,7 +31,8 @@ class Ranking extends React.Component<IRank, State> {
     return (
       <div>
         {books.length > 0 && books.map(item =>
-          <Flex key={item._id} className={style.ranking}>
+          <Link to={`/book/${item._id}`} key={item._id}>
+          <Flex className={style.ranking}>
             <div className={style.ranking_img}>
               <img src={decodeURIComponent(item.cover)} className={style.ranking_cover}/>
             </div>
@@ -62,7 +63,7 @@ class Ranking extends React.Component<IRank, State> {
                 </div>
               </Flex>
             </div>
-          </Flex>)}
+          </Flex></Link>)}
       </div>
     );
   }

@@ -8,6 +8,7 @@ interface IcateSearch {
   start: number;
   limit: number;
 }
+const option = { dataType: 'json' };
 
 export default class NovelService extends Service {
 
@@ -23,8 +24,8 @@ export default class NovelService extends Service {
    * 2、获取排行榜类型
    */
   public async getGender() {
-    const { data } = await  this.ctx.curl('http://api.zhuishushenqi.com/ranking/gender');
-    return JSON.parse(data.toString());
+    const { data } = await  this.ctx.curl('http://api.zhuishushenqi.com/ranking/gender', option);
+    return data;
   }
 
   /**
@@ -32,8 +33,8 @@ export default class NovelService extends Service {
    * @param rankId
    */
   public async getRankById(rankId: string) {
-    const { data } = await this.ctx.curl(`http://api.zhuishushenqi.com/ranking/${rankId}`);
-    return JSON.parse(data.toString()).ranking;
+    const { data } = await this.ctx.curl(`http://api.zhuishushenqi.com/ranking/${rankId}`, option);
+    return data.ranking;
   }
 
   /**
@@ -58,7 +59,8 @@ export default class NovelService extends Service {
    * @param bookId
    */
   public async getBookById(bookId: string) {
-    return this.ctx.curl(`http://api.zhuishushenqi.com/book/${bookId}`);
+    const { data } = await this.ctx.curl(`http://api.zhuishushenqi.com/book/${bookId}`, option);
+    return data;
   }
 
   /**

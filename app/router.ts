@@ -11,7 +11,7 @@ export default (app: Application) => {
   // pages
   router.get('/ui', controller.routes.ui);
   router.get('/ranking/:id', controller.novel.ranking);
-
+  router.get('/book/:id', controller.novel.book);
   router.get('routes', '/*', app.controller.routes.index);
 
 };

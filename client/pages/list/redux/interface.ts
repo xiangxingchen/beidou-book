@@ -91,6 +91,57 @@ interface IRanking {
   id: string;
   total: number;
 }
+interface Rating {
+  count: number;
+  score: number;
+  isEffect: boolean;
+}
+
+interface IBookDetail {
+  _id: string;
+  title: string;
+  author: string;
+  longIntro: string;
+  cover: string;
+  creater: string;
+  majorCate: string;
+  minorCate: string;
+  majorCateV2: string;
+  minorCateV2: string;
+  hiddenPackage: any[];
+  apptype: number[];
+  rating: Rating;
+  hasCopyright: boolean;
+  buytype: number;
+  sizetype: number;
+  superscript: string;
+  currency: number;
+  contentType: string;
+  _le: boolean;
+  allowMonthly: boolean;
+  allowVoucher: boolean;
+  allowBeanVoucher: boolean;
+  hasCp: boolean;
+  postCount: number;
+  latelyFollower: number;
+  followerCount: number;
+  wordCount: number;
+  serializeWordCount: number;
+  retentionRatio: string;
+  updated: string;
+  isSerial: boolean;
+  chaptersCount: number;
+  lastChapter: string;
+  gender: string[];
+  tags: string[];
+  advertRead: boolean;
+  cat: string;
+  donate: boolean;
+  _gg: boolean;
+  isForbidForFreeApp: boolean;
+  discount: null;
+  limit: boolean;
+}
 
 export {
   UserState,
@@ -99,4 +150,5 @@ export {
   ITabs,
   IRanking,
   IBook,
+  IBookDetail,
 };
