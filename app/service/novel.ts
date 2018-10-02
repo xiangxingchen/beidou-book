@@ -8,6 +8,13 @@ interface IcateSearch {
   start: number;
   limit: number;
 }
+
+interface IBookReview {
+  book: string;
+  sort: 'updated' | 'created' | 'comment-count';
+  start: number;
+  limit: number;
+}
 const option = { dataType: 'json' };
 
 export default class NovelService extends Service {
@@ -64,6 +71,7 @@ export default class NovelService extends Service {
    */
   public async getBookById(bookId: string) {
     const { data } = await this.ctx.curl(`http://api.zhuishushenqi.com/book/${bookId}`, option);
+    data.cover = data.cover.slice(7).slice(0, -3);
     return data;
   }
 
@@ -121,5 +129,17 @@ export default class NovelService extends Service {
    */
   public async getNewChapter(id: string) {
     return this.ctx.curl(`http://api05iye5.zhuishushenqi.com/book?view=updated&id=${id}`);
+  }
+
+  /**
+   * 获取书评
+   * @param query
+   */
+  public async getBookReview(query: IBookReview) {
+    const { data } = await this.ctx.curl('http://api.zhuishushenqi.com/post/review/by-book', {
+      data: query,
+      ...option,
+    });
+    return data;
   }
 }
