@@ -112,30 +112,25 @@ class NovelStore {
   @computed get currentRank() {
     return this.rank[this.currentTab];
   }
-  @computed
-  get books() {
-    const books = this.ranking.books;
-    if (books.length > 0) {
-      books.map(item => {
-        item.cover = item.cover.slice(7).slice(0, -3);
-        return item;
-      });
-    }
-    return books;
-  }
 
   @action public setCurrentTab(tab: string): void {
     this.currentTab = tab;
   }
 
-  @action public getData(): void {
-    axios.get('/api/user')
+  @action public getRankingList(id: string): void {
+    axios.get(`/api/getRanking/${id}`)
       .then((res) => {
-        this.data = res.data;
+        this.ranking = res.data;
       })
       .catch((err) => console.log('------------', err));
   }
-
+  @action public getBookById(id: string): void {
+    axios.get(`/api/getBookById/${id}`)
+      .then((res) => {
+        this.bookInfo = res.data;
+      })
+      .catch((err) => console.log('------------', err));
+  }
 }
 
 export default NovelStore;

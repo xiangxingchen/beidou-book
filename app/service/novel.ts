@@ -34,6 +34,10 @@ export default class NovelService extends Service {
    */
   public async getRankById(rankId: string) {
     const { data } = await this.ctx.curl(`http://api.zhuishushenqi.com/ranking/${rankId}`, option);
+    data.ranking.books.map(item => {
+      item.cover = item.cover.slice(7).slice(0, -3);
+      return item;
+    });
     return data.ranking;
   }
 

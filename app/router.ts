@@ -5,9 +5,9 @@ export default (app: Application) => {
 
  // api
   router.resources('user', '/api/user', controller.user);
-  router.resources('getGender', '/api/getGender', controller.novel.getGender);
-
-
+  router.get('getGender', '/api/getGender', controller.novel.getGender);
+  router.get('getRanking', '/api/getRanking/:id', controller.novel.getRanking);
+  router.get('getBookById', '/api/getBookById/:id', controller.novel.getBookById);
   // pages
   router.get('/ui', controller.routes.ui);
   router.get('/ranking/:id', controller.novel.ranking);

@@ -9,7 +9,7 @@ export default class RoutesController extends Controller {
         html: this.ctx.helper.getSeo('/'),
         userStore: { currentUser: 'chen', data: [ 123, 654321 ] },
         uiStore: { ui: 'fffffffffffffff' },
-        novelStore: { rank: data },
+        novelStore: { rank: data, ranking: { books: [] }, bookInfo: {} },
       },
     });
   }

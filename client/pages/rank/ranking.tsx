@@ -1,8 +1,5 @@
 import React from 'react';
 import { Flex, WhiteSpace, Badge } from 'antd-mobile';
-import _ from 'lodash';
-import moment from 'moment';
-import classNames from 'classnames/bind';
 import { defaultProps, computedProps } from 'react-decoration';
 import { inject, observer } from 'mobx-react';
 import { hot } from 'react-hot-loader';
@@ -22,11 +19,17 @@ interface IRank {
 @inject('novelStore')
 @observer
 class Ranking extends React.Component<IRank, State> {
-  // encodeURIComponent
-// window.encodeURIComponent()
+  constructor(props) {
+    super(props);
+    const { id } = props.match.params;
+    console.log('constructor', props);
+    if (props.novelStore.ranking.books.length < 1) {
+      props.novelStore.getRankingList(id);
+    }
+  }
   public render() {
     const { books } = this.props.novelStore.ranking;
-    this.props.novelStore.books;
+    // this.props.novelStore.books;
 
     return (
       <div>

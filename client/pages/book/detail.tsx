@@ -4,9 +4,10 @@ import { inject, observer } from 'mobx-react';
 import moment from 'moment';
 import { hot } from 'react-hot-loader';
 import { Link } from 'react-router-dom';
+import _ from 'lodash';
 import style from './index.module.less';
 import { IBookDetail } from 'client/pages/list/redux/interface';
-moment.lang('zh-cn');
+moment.locale('zh-cn');
 interface State {}
 interface IRank {
   novelStore?: {
@@ -16,6 +17,14 @@ interface IRank {
 @inject('novelStore')
 @observer
 class BookDetail extends React.Component<IRank, State> {
+  constructor(props) {
+    super(props);
+    const { id } = props.match.params;
+    console.log('constructor', props);
+    if (_.isEmpty(props.novelStore.bookInfo)) {
+      props.novelStore.getBookById(id);
+    }
+  }
   public render() {
     const { bookInfo } = this.props.novelStore;
     console.log(bookInfo);
