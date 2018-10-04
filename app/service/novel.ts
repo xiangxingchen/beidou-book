@@ -11,9 +11,17 @@ interface IcateSearch {
 
 interface IBookReview {
   book: string;
-  sort: 'updated' | 'created' | 'comment-count';
-  start: number;
-  limit: number;
+  sort?: 'updated' | 'created' | 'comment-count';
+  sortType?: 'updated' | 'created' | 'comment-count';
+  start?: number;
+  limit?: number;
+}
+interface IBookList {
+  sort: 'collectorCount' | 'created';
+  duration: 'last-seven-days' | 'all';
+  gender: 'male' | 'female';
+  tag?: string;
+  start?: number;
 }
 const option = { dataType: 'json' };
 
@@ -132,7 +140,31 @@ export default class NovelService extends Service {
   }
 
   /**
-   * 获取书评
+   * 14、获取讨论
+   * @param query
+   */
+  public async getBookPost(query: IBookReview) {
+    const { data } = await this.ctx.curl('http://api.zhuishushenqi.com/post/by-book', {
+      data: query,
+      ...option,
+    });
+    return data;
+  }
+
+  /**
+   * 15、获取短评
+   * @param query
+   */
+  public async getBookShortReview(query: IBookReview) {
+    const { data } = await this.ctx.curl('http://api.zhuishushenqi.com/post/short-review/by-book', {
+      data: query,
+      ...option,
+    });
+    return data;
+  }
+
+  /**
+   * 16、获取书评
    * @param query
    */
   public async getBookReview(query: IBookReview) {
@@ -140,6 +172,35 @@ export default class NovelService extends Service {
       data: query,
       ...option,
     });
+    return data.reviews;
+  }
+  /**
+   * 17、推荐书籍
+   * @param bookId
+   */
+  public async getBookRecommend(bookId: string) {
+    const { data } = await this.ctx.curl(`https://novel.juhe.im/recommend/${bookId}`, option);
     return data;
   }
+
+  /**
+   * 18、获取书单
+   * @param query
+   */
+  public async getBookList(query: IBookList) {
+    const { data } = await this.ctx.curl('http://api.zhuishushenqi.com/book-list', {
+      data: query,
+      ...option,
+    });
+    return data;
+  }
+  /**
+   * 19、获取书单详情
+   * @param bookListId
+   */
+  public async getBookListDetail(bookListId: string) {
+    const { data } = await this.ctx.curl(`http://api.zhuishushenqi.com/book-list/${bookListId}`, option);
+    return data;
+  }
+
 }

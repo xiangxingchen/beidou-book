@@ -7,29 +7,31 @@ import { hot } from 'react-hot-loader';
 import { Link } from 'react-router-dom';
 import _ from 'lodash';
 import style from './index.module.less';
-import { IBookDetail } from 'client/pages/list/redux/interface';
+import { IBookDetail, ReviewsItem } from 'client/pages/book/interface';
 
 moment.locale('zh-cn');
 interface State {}
 interface IRank {
-  novelStore?: {
+  bookStore?: {
     bookInfo?: IBookDetail;
+    bookReview?: ReviewsItem [];
   };
 }
-@inject('novelStore')
+@inject('bookStore')
 @observer
 class BookDetail extends React.Component<IRank, State> {
   constructor(props) {
     super(props);
     const { id } = props.match.params;
     console.log('constructor', props);
-    if (_.isEmpty(props.novelStore.bookInfo)) {
-      props.novelStore.getBookById(id);
+    if (_.isEmpty(props.bookStore.bookInfo)) {
+      props.bookStore.getBookById(id);
+      props.bookStore.getBookReview(id);
     }
   }
   public render() {
-    const { bookInfo } = this.props.novelStore;
-    console.log(bookInfo);
+    const { bookInfo, bookReview } = this.props.bookStore;
+    console.log(bookReview);
     return (
       <WingBlank size="lg">
         <Flex>
@@ -66,6 +68,24 @@ class BookDetail extends React.Component<IRank, State> {
         <div className={style.shortInfo}>简介</div>
         <WhiteSpace size="md"/>
         <div>{bookInfo.longIntro}</div>
+        <WhiteSpace size="md"/>
+        <hr />
+        <WhiteSpace size="md"/>
+        <div className={style.shortInfo}>热门书评</div>
+        <WhiteSpace size="md"/>
+        {bookReview.length > 0 && bookReview.map(item => <Flex key={item._id} className={style.review}>
+            <div><img className={style.review_img} src={'http://api.zhuishushenqi.com' + item.author.avatar}/></div>
+            <div className={style.review_info}>
+              <div className={style.review_name}>{item.author.nickname}</div>
+              <div className={style.review_title}>{item.title.slice(0, 15)}</div>
+              <div className={style.gray}>{item.content.slice(0, 60)} ...</div>
+              <Flex className={style.gray}>
+                <Flex.Item>{moment(item.created).fromNow()}</Flex.Item>
+                <Flex.Item>{item.helpful.yes} 有用</Flex.Item>
+              </Flex>
+              <WhiteSpace size="md"/>
+            </div>
+        </Flex>)}
       </WingBlank>
     );
   }
