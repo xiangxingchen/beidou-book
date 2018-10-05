@@ -1,6 +1,6 @@
 import { observable, action, computed } from 'mobx';
 import axios from 'axios';
-import { IBookDetail, ReviewsItem } from './interface';
+import { IBookDetail, ReviewsItem, BooksItem } from './interface';
 
 const INIT_USER_STORE = {
   bookInfo: {
@@ -58,16 +58,19 @@ const INIT_USER_STORE = {
     limit: false,
   },
   bookReview: [],
+  recommendBook: [],
 };
 
 class BookStore {
 
   @observable public bookInfo: IBookDetail;
   @observable public bookReview: ReviewsItem [];
+  @observable public recommendBook: BooksItem [];
 
   constructor(store = INIT_USER_STORE) {
     this.bookInfo = store.bookInfo;
     this.bookReview = store.bookReview;
+    this.recommendBook = store.recommendBook;
   }
 
   @action public getBookById(id: string): void {

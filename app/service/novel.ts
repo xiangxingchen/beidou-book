@@ -180,7 +180,11 @@ export default class NovelService extends Service {
    */
   public async getBookRecommend(bookId: string) {
     const { data } = await this.ctx.curl(`https://novel.juhe.im/recommend/${bookId}`, option);
-    return data;
+    data.books.map(item => {
+      item.cover = item.cover.slice(7).slice(0, -3);
+      return item;
+    });
+    return data.books;
   }
 
   /**

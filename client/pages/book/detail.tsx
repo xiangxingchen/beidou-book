@@ -7,7 +7,7 @@ import { hot } from 'react-hot-loader';
 import { Link } from 'react-router-dom';
 import _ from 'lodash';
 import style from './index.module.less';
-import { IBookDetail, ReviewsItem } from 'client/pages/book/interface';
+import { IBookDetail, ReviewsItem, BooksItem } from 'client/pages/book/interface';
 
 moment.locale('zh-cn');
 interface State {}
@@ -15,6 +15,7 @@ interface IRank {
   bookStore?: {
     bookInfo?: IBookDetail;
     bookReview?: ReviewsItem [];
+    recommendBook?: BooksItem [];
   };
 }
 @inject('bookStore')
@@ -30,8 +31,8 @@ class BookDetail extends React.Component<IRank, State> {
     }
   }
   public render() {
-    const { bookInfo, bookReview } = this.props.bookStore;
-    console.log(bookReview);
+    const { bookInfo, bookReview, recommendBook } = this.props.bookStore;
+    console.log(recommendBook);
     return (
       <WingBlank size="lg">
         <Flex>
@@ -73,7 +74,7 @@ class BookDetail extends React.Component<IRank, State> {
         <WhiteSpace size="md"/>
         <div className={style.shortInfo}>热门书评</div>
         <WhiteSpace size="md"/>
-        {bookReview.length > 0 && bookReview.map(item => <Flex key={item._id} className={style.review}>
+        {bookReview.length > 0 && bookReview.slice(0, 2).map(item => <Flex key={item._id} className={style.review}>
             <div><img className={style.review_img} src={'http://api.zhuishushenqi.com' + item.author.avatar}/></div>
             <div className={style.review_info}>
               <div className={style.review_name}>{item.author.nickname}</div>
@@ -86,6 +87,18 @@ class BookDetail extends React.Component<IRank, State> {
               <WhiteSpace size="md"/>
             </div>
         </Flex>)}
+        <hr />
+        <WhiteSpace size="md"/>
+        <div className={style.shortInfo}>你可能喜欢</div>
+        <WhiteSpace size="md"/>
+        <Flex className={style.flex}>
+        { recommendBook.length > 0 && recommendBook.slice(0, 6).map(item => <Flex.Item key={item._id} className={style.flex_item}>
+          <Link  to={'/book/' + item._id}>
+            <img src={decodeURIComponent(item.cover)} className={style.book_img}/>
+            <div>{item.title}</div>
+          </Link>
+        </Flex.Item>)}
+        </Flex>
       </WingBlank>
     );
   }

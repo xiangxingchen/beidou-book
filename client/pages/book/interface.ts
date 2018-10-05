@@ -1,10 +1,4 @@
 
-interface RootObject {
-  total: number;
-  today: number;
-  reviews: ReviewsItem[];
-  ok: boolean;
-}
 interface ReviewsItem {
   _id?: string;
   rating?: number;
@@ -86,7 +80,25 @@ interface IBookDetail {
   limit: boolean;
 }
 
+interface BooksItem {
+  _id: string;
+  title: string;
+  author: string;
+  site: string;
+  cover: string;
+  shortIntro: string;
+  lastChapter: string;
+  retentionRatio: number;
+  latelyFollower: number;
+  majorCate: string;
+  minorCate: string;
+  allowMonthly: boolean;
+  isSerial: boolean;
+  otherReadRatio: number;
+}
+
 export {
   IBookDetail,
   ReviewsItem,
+  BooksItem,
 };

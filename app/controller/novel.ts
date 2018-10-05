@@ -45,12 +45,12 @@ export default class NovelController extends Controller {
   public async book() {
     const id = this.ctx.params.id;
     const data = await this.service.novel.getBookById(id);
+    const recommend = await this.service.novel.getBookRecommend(id);
     const review = await this.service.novel.getBookReview({
       book: id,
       start: 1,
       limit: 10,
     });
-    console.log('-----', review);
 
     await this.ctx.render('index', {
       initState: {
@@ -58,7 +58,7 @@ export default class NovelController extends Controller {
         userStore: { currentUser: 'chen', data: [ 123, 654321 ] },
         uiStore: { ui: 'fffffffffffffff' },
         novelStore: { ranking: { books: [] } },
-        bookStore: { bookInfo: data, bookReview: review },
+        bookStore: { bookInfo: data, bookReview: review, recommendBook: recommend },
       },
     });
   }
