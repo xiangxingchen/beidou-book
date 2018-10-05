@@ -9,6 +9,7 @@ import Users from './pages/list/user';
 import UI from './pages/ui/ui';
 import Ranking from './pages/rank/ranking';
 import BookDetail from './pages/book/detail';
+import Chapter from './pages/book/chapter';
 
 // const Users = Loadable({
 //   loader: () => import('./pages/list/user'),
@@ -23,6 +24,7 @@ export default (
     <Route exact path="/ui" component={UI} />
     <Route exact path="/ranking/:id" component={Ranking} />
     <Route exact path="/book/:id" component={BookDetail} />
+    <Route exact path="/books/:id/:chapter" component={Chapter} />
   </Switch>
   <DevTools />
   </div>

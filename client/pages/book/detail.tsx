@@ -99,6 +99,11 @@ class BookDetail extends React.Component<IRank, State> {
           </Link>
         </Flex.Item>)}
         </Flex>
+        <Flex className={style.footer}>
+          <Flex.Item>加入书架</Flex.Item>
+          <Flex.Item><Link to={`/books/${bookInfo._id}/1`}>开始阅读</Link></Flex.Item>
+          <Flex.Item>下载</Flex.Item>
+        </Flex>
       </WingBlank>
     );
   }

@@ -88,7 +88,8 @@ export default class NovelService extends Service {
    * @param bookId
    */
   public async getAtoc(bookId: string) {
-    return this.ctx.curl(`http://api.zhuishushenqi.com/atoc?view=summary&book=${bookId}`);
+    const { data } = await this.ctx.curl(`http://api.zhuishushenqi.com/atoc?view=summary&book=${bookId}`, option);
+    return data;
   }
 
   /**
@@ -104,7 +105,9 @@ export default class NovelService extends Service {
    * @param sourceId
    */
   public async getChaptersBySourceId(sourceId: string) {
-    return this.ctx.curl(`http://api.zhuishushenqi.com/atoc/${sourceId}?view=chapters`);
+    // encodeURIComponent(sourceId)
+    const { data } = await this.ctx.curl(`http://api.zhuishushenqi.com/atoc/${sourceId}?view=chapters`, option);
+    return data;
   }
 
   /**
@@ -112,7 +115,8 @@ export default class NovelService extends Service {
    * @param link
    */
   public async getChaptersByLink(link: string) {
-    return this.ctx.curl(`http://chapterup.zhuishushenqi.com/chapter/${link}`);
+    const { data } = await this.ctx.curl(`http://chapterup.zhuishushenqi.com/chapter/${encodeURIComponent(link)}`, option);
+    return data;
   }
 
   /**

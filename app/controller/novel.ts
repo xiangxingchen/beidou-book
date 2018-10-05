@@ -8,14 +8,12 @@ export default class NovelController extends Controller {
     this.ctx.status = 200;
   }
   public async getRanking() {
-    console.log('-------', this.ctx.params);
     const id = this.ctx.params.id;
     const data = await this.service.novel.getRankById(id);
     this.ctx.body = data;
     this.ctx.status = 200;
   }
   public async getBookReview() {
-    console.log('-------', this.ctx.params);
     const id = this.ctx.params;
     const data = await this.service.novel.getBookReview(id);
     this.ctx.body = data;
@@ -23,7 +21,6 @@ export default class NovelController extends Controller {
   }
 
   public async getBookById() {
-    console.log('-------', this.ctx.params);
     const id = this.ctx.params.id;
     const data = await this.service.novel.getBookById(id);
     this.ctx.body = data;
@@ -59,6 +56,28 @@ export default class NovelController extends Controller {
         uiStore: { ui: 'fffffffffffffff' },
         novelStore: { ranking: { books: [] } },
         bookStore: { bookInfo: data, bookReview: review, recommendBook: recommend },
+      },
+    });
+  }
+  public async chapter() {
+    console.log('---chapter--', this.ctx.params);
+    const { id, chapter } = this.ctx.params;
+    const sourceArr = await this.service.novel.getAtoc(id);
+    console.log(sourceArr);
+    const chapterList = await this.service.novel.getChaptersBySourceId(sourceArr[0]._id);
+    const chapterInfo = await this.service.novel.getChaptersByLink(chapterList.chapters[0].link);
+    await this.ctx.render('index', {
+      initState: {
+        html: this.ctx.helper.getSeo('/'),
+        userStore: { currentUser: 'chen', data: [ 123, 654321 ] },
+        uiStore: { ui: 'fffffffffffffff' },
+        novelStore: { ranking: { books: [] } },
+        bookStore: { bookInfo: {}, bookReview: [], recommendBook: [] },
+        chapterStore: {
+          sourceArr,
+          chapterList,
+          chapterInfo,
+        },
       },
     });
   }

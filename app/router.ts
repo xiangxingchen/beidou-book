@@ -13,6 +13,7 @@ export default (app: Application) => {
   router.get('/ui', controller.routes.ui);
   router.get('/ranking/:id', controller.novel.ranking);
   router.get('/book/:id', controller.novel.book);
+  router.get('/books/:id/:chapter', controller.novel.chapter);
   router.get('routes', '/*', app.controller.routes.index);
 
 };

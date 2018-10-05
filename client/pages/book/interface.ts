@@ -97,8 +97,61 @@ interface BooksItem {
   otherReadRatio: number;
 }
 
+interface ISourceItem {
+  _id: string;
+  source: string;
+  name: string;
+  link: string;
+  lastChapter: string;
+  isCharge: boolean;
+  chaptersCount: number;
+  updated: string;
+  starting: boolean;
+  host: string;
+}
+interface IChapterList {
+  _id: string;
+  link: string;
+  source: string;
+  name: string;
+  chapters: ChaptersItem[];
+  updated: string;
+  starting: boolean;
+  host: string;
+}
+interface ChaptersItem {
+  title: string;
+  link: string;
+  chapterCover: string;
+  totalpage: number;
+  partsize: number;
+  order: number;
+  currency: number;
+  unreadble: boolean;
+  isVip: boolean;
+}
+interface ChapterInfo {
+  ok: boolean;
+  chapter: Chapter;
+}
+interface Chapter {
+  body?: string;
+  title: string;
+  isVip?: boolean;
+  order?: number;
+  currency?: number;
+  id: string;
+  created?: string;
+  updated?: string;
+  cpContent?: string;
+}
+
+
 export {
   IBookDetail,
   ReviewsItem,
   BooksItem,
+  ISourceItem,
+  IChapterList,
+  ChapterInfo,
 };
